@@ -31,6 +31,13 @@ public class LoginTest {
     public void loginAsBankManager() {
         loginPage.clickBankManagerLogin();
     }
+
+    public void loginAsCustomer(String customerName) {
+        loginPage.clickCustomerLogin();
+        loginPage.selectCustomer(customerName);
+        loginPage.clickLogin();
+    }
+
     @AfterEach
     public void tearDown() {
         if (driver != null) {
