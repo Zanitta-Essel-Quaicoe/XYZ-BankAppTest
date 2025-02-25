@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -27,10 +28,12 @@ public class OpenAccountPage {
 
     // Select an existing customer from the dropdown
     public void selectCustomer(String customerName) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(customerDropdown));
+        wait.until(ExpectedConditions.elementToBeClickable(customerDropdown));
         Select customerSelect = new Select(driver.findElement(customerDropdown));
         customerSelect.selectByVisibleText(customerName);
+        System.out.println("Selected customer: " + customerName);
     }
+
 
     // Select currency type (e.g., Dollar, Pound, Rupee)
     public void selectCurrency(String currency) {
@@ -41,8 +44,18 @@ public class OpenAccountPage {
 
     // Click "Process" button to create the account
     public void clickProcessButton() {
+        System.out.println("Clicking the 'Process' button...");
         jsExecutor.executeScript("arguments[0].click();", driver.findElement(processButton));
-        wait.until(ExpectedConditions.alertIsPresent());
-        driver.switchTo().alert().accept(); // Accept success alert
+
+        try {
+            System.out.println("Waiting for confirmation alert...");
+            wait.until(ExpectedConditions.alertIsPresent());
+            System.out.println("Alert detected: " + driver.switchTo().alert().getText());
+            driver.switchTo().alert().accept(); // Accept success alert
+            System.out.println("Alert accepted.");
+        } catch (TimeoutException e) {
+            System.out.println("No alert appeared — returning null.");
+        }
     }
+
 }

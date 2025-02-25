@@ -34,16 +34,16 @@ public class CustomerPage {
     public boolean isCustomerPageDisplayed() {
         try {
             WebElement nameLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(customerNameLabel));
-            System.out.println("✅ Customer page displayed for: " + nameLabel.getText());
+            System.out.println("Customer page displayed for: " + nameLabel.getText());
             return nameLabel.isDisplayed();
         } catch (TimeoutException e) {
-            System.out.println("❌ Customer page not displayed.");
+            System.out.println("Customer page not displayed.");
             return false;
         }
     }
 
     public void viewTransactions() {
-        System.out.println("📜 Viewing transactions...");
+        System.out.println("Viewing transactions...");
         wait.until(ExpectedConditions.elementToBeClickable(transactionButton)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(transactionTable));
     }
@@ -51,16 +51,16 @@ public class CustomerPage {
     public boolean isTransactionPageDisplayed() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(transactionTable));
-            System.out.println("✅ Transactions page displayed.");
+            System.out.println("Transactions page displayed.");
             return true;
         } catch (TimeoutException e) {
-            System.out.println("❌ Failed to load transaction page.");
+            System.out.println("Failed to load transaction page.");
             return false;
         }
     }
 
     public void depositFunds(int amount) {
-        System.out.println("💰 Depositing: " + amount);
+        System.out.println("Depositing: " + amount);
         wait.until(ExpectedConditions.elementToBeClickable(depositButton)).click();
         ensureActiveTab(activeDepositTab);
 
@@ -70,11 +70,11 @@ public class CustomerPage {
 
         wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(confirmationMessage));
-        System.out.println("✅ Deposit successful.");
+        System.out.println("Deposit successful.");
     }
 
     public void withdrawFunds(int amount) {
-        System.out.println("💸 Withdrawing: " + amount);
+        System.out.println("Withdrawing: " + amount);
         wait.until(ExpectedConditions.elementToBeClickable(withdrawButton)).click();
         ensureActiveTab(activeWithdrawTab);
 
@@ -86,10 +86,10 @@ public class CustomerPage {
 
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(confirmationMessage));
-            System.out.println("✅ Withdrawal successful.");
+            System.out.println("Withdrawal successful.");
         } catch (TimeoutException e) {
             if (isTransactionFailed()) {
-                System.out.println("❌ Insufficient funds error detected.");
+                System.out.println("Insufficient funds error detected.");
             }
         }
     }
@@ -98,28 +98,28 @@ public class CustomerPage {
         try {
             WebElement balanceElement = wait.until(ExpectedConditions.presenceOfElementLocated(balanceLocator));
             String balance = balanceElement.getText().trim();
-            System.out.println("📊 Current balance: " + balance);
+            System.out.println("Current balance: " + balance);
             return balance;
         } catch (TimeoutException e) {
-            System.out.println("❌ Failed to fetch balance.");
+            System.out.println("Failed to fetch balance.");
             return "N/A";
         }
     }
 
     public void waitForBalanceToUpdate(String expectedBalance) {
         try {
-            System.out.println("⏳ Waiting for balance to update to: " + expectedBalance);
+            System.out.println("Waiting for balance to update to: " + expectedBalance);
             wait.until(ExpectedConditions.textToBePresentInElementLocated(balanceLocator, expectedBalance));
-            System.out.println("✅ Balance updated.");
+            System.out.println("Balance updated.");
         } catch (TimeoutException e) {
-            System.out.println("❌ Balance did not update to expected value: " + expectedBalance);
+            System.out.println("Balance did not update to expected value: " + expectedBalance);
         }
     }
 
     public boolean isTransactionFailed() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage));
-            System.out.println("❌ Transaction failed (insufficient funds or other error).");
+            System.out.println("Transaction failed (insufficient funds or other error).");
             return true;
         } catch (TimeoutException e) {
             return false;
@@ -137,10 +137,10 @@ public class CustomerPage {
     private boolean isTabActive(By locator, String tabName) {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-            System.out.println("✅ " + tabName + " tab is active.");
+            System.out.println(tabName + " tab is active.");
             return true;
         } catch (TimeoutException e) {
-            System.out.println("❌ " + tabName + " tab is not active.");
+            System.out.println( tabName + " tab is not active.");
             return false;
         }
     }
@@ -149,7 +149,7 @@ public class CustomerPage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(activeTabLocator));
         } catch (TimeoutException e) {
-            System.out.println("⚠️ Active tab not found: " + activeTabLocator);
+            System.out.println(" Active tab not found: " + activeTabLocator);
         }
     }
 }

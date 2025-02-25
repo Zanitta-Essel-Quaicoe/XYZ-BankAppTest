@@ -33,8 +33,8 @@ public class CustomersPage {
         List<WebElement> rows = driver.findElements(customerRows);
 
         // Debugging: Print all customers found
-        System.out.println("🔍 Searching for customer: " + customerName);
-        System.out.println("📝 Customers found:");
+        System.out.println("Searching for customer: " + customerName);
+        System.out.println("Customers found:");
         for (WebElement row : rows) {
             System.out.println(row.getText());
         }
@@ -54,14 +54,14 @@ public class CustomersPage {
 
         List<WebElement> deleteBtns = driver.findElements(deleteButtons);
         if (!deleteBtns.isEmpty()) {
-            System.out.println("🗑️ Deleting customer: " + customerName);
+            System.out.println("Deleting customer: " + customerName);
             deleteBtns.get(0).click(); // Click the first delete button
         } else {
-            System.out.println("❌ No delete button found for customer: " + customerName);
+            System.out.println("No delete button found for customer: " + customerName);
         }
 
         // Wait and verify deletion
         boolean isDeleted = !searchCustomer(customerName);
-        System.out.println("✅ Customer deleted: " + isDeleted);
+        System.out.println("Customer deleted: " + isDeleted);
     }
 }

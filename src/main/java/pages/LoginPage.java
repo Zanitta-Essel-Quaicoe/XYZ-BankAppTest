@@ -28,7 +28,7 @@ public class LoginPage {
         wait.until(ExpectedConditions.elementToBeClickable(bankManagerLoginButton)).click();
     }
 
-    // ✅ NEW: Click "Customer Login"
+    //  NEW: Click "Customer Login"
     public void clickCustomerLogin() {
         wait.until(ExpectedConditions.elementToBeClickable(customerLoginButton)).click();
     }
@@ -39,10 +39,6 @@ public class LoginPage {
         driver.findElement(By.xpath("//option[contains(text(),'" + customerName + "')]")).click();
     }
 
-    // Click the login button (for customers)
-    //public void clickLogin() {
-       // wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
-    //}
     // Wait for customer dashboard to load after clicking login
     public void clickLogin() {
         wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
@@ -50,7 +46,7 @@ public class LoginPage {
     }
 
 
-    // ✅ NEW: Verify if login page is displayed (used for logout validation)
+    //  Verify if login page is displayed (used for logout validation)
     public boolean isLoginPageDisplayed() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(loginPageHeader)).isDisplayed();
     }
